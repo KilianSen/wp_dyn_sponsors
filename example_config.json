@@ -1,0 +1,39 @@
+{
+  "teams": {
+    "team1": {
+      "href": "https://team1.example.com",
+      "img": "https://team1.example.com/logo.png"
+    },
+    "team2": {
+      "href": "https://team2.example.com",
+      "img": "https://team2.example.com/logo.png"
+    }
+  },
+  "levels": {
+    "gold": {
+      "color": "#FFD700"
+    },
+    "silver": {
+      "color": "#C0C0C0"
+    }
+  },
+  "sponsors": {
+    "sponsor1": {
+      "img": "https://sponsor1.example.com/logo.png",
+      "href": "https://sponsor1.example.com",
+      "affiliatedWith": [
+        "team1"
+      ],
+      "level": "gold"
+    },
+    "sponsor2": {
+      "img": "https://sponsor2.example.com/logo.png",
+      "href": "https://sponsor2.example.com",
+      "affiliatedWith": [
+        "team1",
+        "team2"
+      ],
+      "level": "silver"
+    }
+  }
+}
