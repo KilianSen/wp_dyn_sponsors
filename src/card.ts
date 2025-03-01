@@ -1,67 +1,27 @@
-function smallCard(logoURL: string) {
-	const container = document.createElement('div');
-	container.classList.add('sponsor-card');
-	
-	const img = document.createElement('img');
-	img.src = logoURL;
-	container.appendChild(img);
-	
-	return container;
+function passiveCard(cardImageUrl: string) {
+	return DIV('sponsor-card', undefined, [IMG(undefined, undefined, undefined, cardImageUrl)]);
 }
 
-function bigCard(logoURL: string, TITLE: string, tier: string, levelColor: string, URL: string, teamUrls: string[]) {
-	const container = document.createElement('div');
-	container.classList.add('sponsor-card');
-	container.classList.add('absolute');
-	
-	const img = document.createElement('img');
-	img.src = logoURL;
-	container.appendChild(img);
-	
-	const content = document.createElement('div');
-	content.classList.add("sponsor-content")
-	
-	const title = document.createElement('h1');
-	title.textContent = TITLE;
-	content.appendChild(title);
-	
-	const tierContainer = document.createElement('div');
-	tierContainer.classList.add('tier-container');
-	
-	const tierDiv = document.createElement('div');
-	tierDiv.textContent = tier;
-	tierDiv.classList.add('tier-label')
-	tierDiv.style.backgroundColor = LightenDarkenColor(levelColor, -25)
-	tierDiv.style.color = levelColor;
-	tierContainer.appendChild(tierDiv);
-	
-	const link = document.createElement('a');
-	link.href = URL;
-	link.textContent = 'Visit Sponsor';
-	tierContainer.appendChild(link);
-	
-	content.appendChild(tierContainer);
-	
-	const teamContainer = document.createElement('div');
-	
-	for (const url in teamUrls) {
-		const img = document.createElement('img');
-		img.src = url;
-		teamContainer.appendChild(img);
-		
-	}
-	
-	content.appendChild(teamContainer);
-	container.appendChild(content);
-	return container;
+function hoverCard(cardImageUrl: string, cardTitle: string, badge: string | undefined, badgeColor: string, referralUrl: string | undefined, affiliatedUrls: string[], description: string | undefined) {
+	return DIV(['sponsor-card', "absolute"], undefined, [
+		IMG(undefined, undefined, undefined, cardImageUrl),
+		DIV('sponsor-content', undefined, [
+			H1(undefined, {marginBlock: "5px"}, cardTitle),
+			DIV('tier-container', undefined, [
+				badge?DIV('tier-label', { color: badgeColor, backgroundColor: LightenDarkenColor(badgeColor, -25) }, badge): undefined,
+				referralUrl ? A(undefined, undefined, 'Visit Sponsor', referralUrl): undefined
+			]),
+			description?DIV(undefined, undefined, description): undefined,
+			DIV(undefined, undefined, [
+				...affiliatedUrls.map(url => IMG(undefined, undefined, undefined, url))
+			])
+		])
+	]);
 }
 
-function sc(logoURL: string, TITLE: string, tier: string, levelColor: string, URL: string, teamUrls: string[]) {
-	const cardDiv = document.createElement('div');
-	cardDiv.classList.add('relative');
-	
-	cardDiv.appendChild(smallCard(logoURL));
-	cardDiv.appendChild(bigCard(logoURL, TITLE, tier, levelColor, URL, teamUrls));
-	
-	return cardDiv;
+function sponsorCard(cardImageUrl: string, cardTitle: string, badge: string, badgeColor: string, referralUrl: string | undefined, affiliatedUrls: string[], description: string | undefined) {
+	return DIV('relative', undefined, [
+		passiveCard(cardImageUrl),
+		hoverCard(cardImageUrl, cardTitle, badge, badgeColor, referralUrl, affiliatedUrls, description)
+	]);
 }

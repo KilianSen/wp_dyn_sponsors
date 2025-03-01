@@ -61,5 +61,11 @@
 
 .sponsor-card:hover > .sponsor-content {
     display: flex;
-    background-color: rgb(142, 142, 142);
+}
+
+.sponsor-card:hover.absolute {
+    background-color: rgb(255, 255, 255);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.12);
+    scale: 1.5;
 }

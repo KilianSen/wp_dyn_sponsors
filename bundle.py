@@ -1,21 +1,24 @@
 import os
 
-def get_files_by_ext(path, ext) -> {str: str}:
+def get_files_by_ext(path, ext, op=None) -> {str: str}:
     contents = {}
     for root, dirs, files in os.walk(path):
         for file in files:
             if file.endswith(ext):
                 with open(os.path.join(root, file), 'r') as f:
-                    contents[file] = f.read()
+                    raw = f.read()
+                    if op:
+                        raw = op(raw)
+                    contents[file] = raw
     return contents
 
-def tag(tag, content):
-    return f"<{tag}>\n{content}\n</{tag}>"
+def tag(tag, content,nl=False):
+    return f"<{tag}>{"\n" if nl else ""}{content}{"\n" if nl else ""}</{tag}>"
 
 if __name__ == "__main__":
     try:
-        html = get_files_by_ext('src', '.html')
-        css = get_files_by_ext('src', '.css')
+        html = get_files_by_ext('src', '.html', lambda x: ''.join([k.strip() for k in x.split('\n')]))
+        css = get_files_by_ext('build', '.css')
         js = get_files_by_ext('build', '.js')
     except Exception as e:
         print("Could not gather bundle files!",e)
@@ -25,16 +28,12 @@ if __name__ == "__main__":
         with open('build/bundle.html', 'w') as f:
             for name, content in html.items():
                 f.write(tag("div", content))
-                f.write("\n")
-
 
             for name, content in css.items():
                 f.write(tag("style", content))
-                f.write("\n")
 
             for name, content in js.items():
                 f.write(tag("script", content))
-                f.write("\n")
     except Exception as e:
         print("An error occurred during bundling, abort!",e)
         exit(1)

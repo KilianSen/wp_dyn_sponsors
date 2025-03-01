@@ -1,39 +1,33 @@
-async function init() {
-	// @ts-ignore
-	const sponsorData = JSON.parse(document.getElementsByTagName("code")![0].innerText) as InputSponsorData;
-	const structuredSponsorData = parseSponsorData(sponsorData);
+async function main() {
+	const structuredSponsorData = parseSponsorConfig(
+		JSON.parse(document.getElementsByTagName("code")![0].innerText) as InputSponsorConfig
+	);
 	
-	for (const level in structuredSponsorData) {
-		const levelContainer = document.createElement('div');
-		levelContainer.classList.add('level');
+	for (const level in structuredSponsorData.data) {
+		const levelContainer = DIV('level', undefined, [
+			H3('sponsor-heading', structuredSponsorData.features.coloredHeadings? {color: structuredSponsorData.levels[level].color}: undefined, level),
+			DIV('level-sponsor-container', undefined, [
+				...Object.keys(structuredSponsorData.data[level]).toSorted(() => structuredSponsorData.features.randomizeOrder ? Math.random() - 0.5 : 0).map(sponsor => {
+					const {img, href, affiliatedWith, description} = structuredSponsorData.data[level][sponsor];
+					return sponsorCard(
+						img,
+						sponsor,
+						structuredSponsorData.features.badge? level: undefined,
+						structuredSponsorData.levels[level].color,
+						href,
+						Object.keys(affiliatedWith).map(e => structuredSponsorData.teams[e].img).toSorted(),
+						description
+					);
+				}),
+			]),
+		]);
 		
-		const heading = document.createElement('h3');
-		heading.classList.add('sponsor-heading');
-		heading.style.color = sponsorData.levels[level].color;
-		heading.textContent = level;
-		levelContainer.appendChild(heading);
-		
-		const levelSponsorContainer = document.createElement('div');
-		levelSponsorContainer.classList.add('level-sponsor-container');
-		levelContainer.appendChild(levelSponsorContainer);
-		
-		for (const sponsor of Object.keys(structuredSponsorData[level]).toSorted(() => Math.random() - 0.5)) {
-			const {img, href, affiliatedWith} = structuredSponsorData[level][sponsor];
-			levelSponsorContainer.appendChild(
-				sc(
-					img,
-					sponsor,
-					level,
-					sponsorData.levels[level].color,
-					href,
-					Object.keys(affiliatedWith).map(e => sponsorData.teams[e].img).toSorted()
-				)
-			);
-		}
 		
 		document.getElementById('container')!.appendChild(levelContainer);
 	}
+	if (structuredSponsorData.features.randomizeOrder) {
+		document.getElementById('container')!.appendChild(P(undefined, undefined, "*To represent our sponsors fairly, we have randomized the order in which they are displayed."));
+	}
 }
 
-
-init().then()
+main().then()

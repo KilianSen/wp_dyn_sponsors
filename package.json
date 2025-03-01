@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "bundle": "py bundle.py",
+    "minify": "esbuild --minify ./src/style.css --outfile=./build/style.min.css && esbuild --minify ./build/*.js --outdir=./build/ --allow-overwrite",
     "publish": "npm run build && npm run bundle"
   },
   "private": true,
