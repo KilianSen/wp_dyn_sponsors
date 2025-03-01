@@ -20,7 +20,7 @@ async function init() {
 		for (const sponsor of Object.keys(structuredSponsorData[level]).toSorted(() => Math.random() - 0.5)) {
 			const {img, href, affiliatedWith} = structuredSponsorData[level][sponsor];
 			levelSponsorContainer.appendChild(
-				createSponsorCard(
+				sc(
 					img,
 					sponsor,
 					level,

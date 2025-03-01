@@ -3,8 +3,9 @@
     gap: 0.5rem;
     align-items: center;
     justify-content: center;
-    background-color: #f3f4f6;
     padding: 1rem;
+
+    height: 100%;
 }
 
 .sponsor-card img {
@@ -33,11 +34,7 @@
 
 .sponsor-content {
     display: none;
-}
-
-.sponsor-card:hover > .sponsor-content {
-    display: block;
-    scale: 1;
+    flex-direction: column;
 }
 
 .tier-label {
@@ -49,4 +46,20 @@
 .tier-container > a {
     text-decoration: none;
     text-wrap: nowrap;
+}
+
+.absolute {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.relative {
+    position: relative;
+}
+
+.sponsor-card:hover > .sponsor-content {
+    display: flex;
+    background-color: rgb(142, 142, 142);
 }

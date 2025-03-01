@@ -1,6 +1,18 @@
-function createSponsorCard(logoURL: string, TITLE: string, tier: string, levelColor: string, URL: string, teamUrls: string[]) {
+function smallCard(logoURL: string) {
 	const container = document.createElement('div');
 	container.classList.add('sponsor-card');
+	
+	const img = document.createElement('img');
+	img.src = logoURL;
+	container.appendChild(img);
+	
+	return container;
+}
+
+function bigCard(logoURL: string, TITLE: string, tier: string, levelColor: string, URL: string, teamUrls: string[]) {
+	const container = document.createElement('div');
+	container.classList.add('sponsor-card');
+	container.classList.add('absolute');
 	
 	const img = document.createElement('img');
 	img.src = logoURL;
@@ -41,7 +53,15 @@ function createSponsorCard(logoURL: string, TITLE: string, tier: string, levelCo
 	
 	content.appendChild(teamContainer);
 	container.appendChild(content);
-	
 	return container;
 }
 
+function sc(logoURL: string, TITLE: string, tier: string, levelColor: string, URL: string, teamUrls: string[]) {
+	const cardDiv = document.createElement('div');
+	cardDiv.classList.add('relative');
+	
+	cardDiv.appendChild(smallCard(logoURL));
+	cardDiv.appendChild(bigCard(logoURL, TITLE, tier, levelColor, URL, teamUrls));
+	
+	return cardDiv;
+}

@@ -4,6 +4,7 @@
     "module": "commonjs",
     "skipLibCheck": true,
     "outDir": "./build",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "jsx": "react"
   }
 }
