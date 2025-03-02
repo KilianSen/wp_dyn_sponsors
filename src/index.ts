@@ -3,12 +3,12 @@ async function main() {
 		JSON.parse(document.getElementsByTagName("code")![0].innerText) as InputSponsorConfig
 	);
 	
-	for (const level in structuredSponsorData.data) {
+	for (const level in structuredSponsorData.structure) {
 		const levelContainer = DIV('level', undefined, [
 			H3('sponsor-heading', structuredSponsorData.features.coloredHeadings? {color: structuredSponsorData.levels[level].color}: undefined, level),
 			DIV('level-sponsor-container', undefined, [
-				...Object.keys(structuredSponsorData.data[level]).toSorted(() => structuredSponsorData.features.randomizeOrder ? Math.random() - 0.5 : 0).map(sponsor => {
-					const {img, href, affiliatedWith, description} = structuredSponsorData.data[level][sponsor];
+				...Object.keys(structuredSponsorData.structure[level]).toSorted(() => structuredSponsorData.features.randomizeOrder ? Math.random() - 0.5 : 0).map(sponsor => {
+					const {img, href, affiliatedWith, description} = structuredSponsorData.structure[level][sponsor];
 					return sponsorCard(
 						img,
 						sponsor,
