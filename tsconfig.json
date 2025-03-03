@@ -1,10 +1,27 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "commonjs",
-    "skipLibCheck": true,
     "outDir": "./build",
     "rootDir": "./src",
-    "jsx": "react"
+
+    "target": "ESNext",
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "lib": [
+      "DOM",
+      "ESNext",
+    ],
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
   }
 }

@@ -5,9 +5,10 @@
   "main": "src/index.html",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "bundle": "py bundle.py",
-    "minify": "esbuild --minify ./src/style.css --outfile=./build/style.min.css && esbuild --minify ./build/*.js --outdir=./build/ --allow-overwrite",
-    "publish": "npm run build && npm run bundle"
+    "bundle": "esbuild ./src/ --bundle --outfile=build/bundle.js --minify",
+    "bundle-css": "esbuild ./src/ --bundle --outfile=build/bundle.css --minify",
+    "pack": "py bundle.py",
+    "publish": "npm run build && npm run bundle && npm run bundle-css && npm run pack"
   },
   "private": true,
   "devDependencies": {
