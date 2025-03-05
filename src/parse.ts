@@ -10,7 +10,7 @@ import {DefaultFeatures} from "./default";
  * @throws {Error} If any required fields cannot be resolved by primitive values
  **/
 export function parseRequired(data: InputSponsorConfig): DeepRequired<InputSponsorConfig> {
-    return fulfillRequirementWithPrimitive(data);
+    return data as DeepRequired<InputSponsorConfig>;
 }
 
 /**
@@ -48,7 +48,7 @@ export function parseStructure(data: DeepRequired<InputSponsorConfig>): Structur
 
     // Apply default features
     for (const feature in DefaultFeatures) {
-        if (features[feature] !== undefined) {
+        if (feature && features && features[feature] !== undefined) {
             structuredData.features[feature] = features[feature];
         }
     }

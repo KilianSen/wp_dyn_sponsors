@@ -4,11 +4,9 @@
   "description": "",
   "main": "src/index.html",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "bundle": "esbuild ./src/ --bundle --outfile=build/bundle.js --minify",
-    "bundle-css": "esbuild ./src/ --bundle --outfile=build/bundle.css --minify",
+    "bundle": "esbuild ./src/ --bundle --outfile=build/bundle.js --target=esnext --legal-comments=inline",
     "pack": "py bundle.py",
-    "publish": "npm run build && npm run bundle && npm run bundle-css && npm run pack"
+    "publish": "npm run bundle && npm run pack"
   },
   "private": true,
   "devDependencies": {

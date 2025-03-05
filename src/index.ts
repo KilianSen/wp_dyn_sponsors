@@ -2,6 +2,8 @@ import {parseConfig} from "./parse";
 import {InputSponsorConfig} from "./types";
 import {DIV, H3, P} from "./components.ts";
 import {sponsorCard} from "./card.ts";
+// @ts-ignore
+import "./style.css"
 
 async function main() {
     const structuredSponsorData = parseConfig(
@@ -34,5 +36,6 @@ async function main() {
         document.getElementById('container')!.appendChild(P(undefined, undefined, "*To represent our sponsors fairly, we have randomized the order in which they are displayed."));
     }
 }
+document.body.innerHTML = document.body.innerHTML.replace("&amp;", "&").replace("&#038;", "&");
 
-main().then()
+setTimeout(main, 1000);

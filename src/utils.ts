@@ -61,32 +61,23 @@ export function fulfillRequirementWithPrimitive<T>(input: T): DeepRequired<T> {
  * @param amt percentage (-100,100)
  */
 export function lightenDarkenHex(col: string, amt: number) {
-    function bitwiseAnd(a: number, b: number) {
-        return a & b; // This is only needed because of WordPress O.o
-    }
-
     let usePound = false;
     if (col[0] == "#") {
         col = col.slice(1);
         usePound = true;
     }
-
+    
     const num = parseInt(col, 16);
-
+    
     let r = (num >> 16) + amt;
-
-    if (r > 255) r = 255;
-    else if (r < 0) r = 0;
-
-    let b = bitwiseAnd((num >> 8), 0x00FF) + amt;
-
-    if (b > 255) b = 255;
-    else if (b < 0) b = 0;
-
-    let g = bitwiseAnd(num, 0x0000FF) + amt;
-
-    if (g > 255) g = 255;
-    else if (g < 0) g = 0;
-
-    return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
+    r = Math.min(255, Math.max(0, r));
+    
+    let b = (Number(num >> 8) /*!//>*/ & Number(0x00FF)) + amt;
+    b = Math.min(255, Math.max(0, b));
+    
+    let g = (Number(num) & Number(0x0000FF)) + amt;
+    g = Math.min(255, Math.max(0, g));
+    
+    const result = (Number(g) | Number(b << 8/*!//>*/ ) | Number(r << 16/*!//>*/ )).toString(16).padStart(6, '0');
+    return (usePound ? "#" : "") + result;
 }

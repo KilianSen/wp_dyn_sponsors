@@ -1,6 +1,6 @@
 import os
 
-def get_files_by_ext(path, ext, op=None) -> {str: str}:
+def get_files_by_ext(path, ext, op=None) -> dict[str, bytes]:
     contents = {}
     for root, dirs, files in os.walk(path):
         for file in files:
@@ -12,8 +12,8 @@ def get_files_by_ext(path, ext, op=None) -> {str: str}:
                     contents[file] = raw
     return contents
 
-def tag(tag, content,nl=False):
-    return f"<{tag}>{"\n" if nl else ""}{content}{"\n" if nl else ""}</{tag}>"
+def tag(tag: str, content: str, nl=False) -> str:
+    return f"<{tag}>{'\n' if nl else ''}" + content + f"{'\n' if nl else ''}</{tag}>"
 
 if __name__ == "__main__":
     try:

@@ -15,7 +15,7 @@ export function hoverCard(cardImageUrl: string, cardTitle: string, badge: string
 				referralUrl ? A(undefined, undefined, 'Visit Sponsor', referralUrl): undefined
 			]),
 			description?DIV(undefined, undefined, description): undefined,
-			DIV(undefined, undefined, [
+			DIV(undefined, {display:"flex", gap: "2em"}, [
 				...affiliatedUrls.map(url => IMG(undefined, undefined, undefined, url))
 			])
 		])
