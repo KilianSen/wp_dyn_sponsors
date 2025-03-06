@@ -10,6 +10,7 @@
 
 .sponsor-card img {
     max-width: 100px;
+    background-color: unset;
 }
 
 .sponsor-card h1 {
@@ -48,24 +49,20 @@
     text-wrap: nowrap;
 }
 
-.absolute {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-}
-
 .relative {
     position: relative;
 }
-
+.sponsor-card.absolute {
+    opacity: 0;
+}
 .sponsor-card:hover > .sponsor-content {
     display: flex;
 }
 
 .sponsor-card:hover.absolute {
+    opacity: 1;
     background-color: rgb(255, 255, 255);
     border-radius: 0.5rem;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.12);
-    scale: 1.5;
+    scale: 1.25;
 }

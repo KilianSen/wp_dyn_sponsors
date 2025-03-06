@@ -2,12 +2,14 @@ import {DeepRequired} from "./utils";
 
 /**
  * This represents the structure of the input json config.
+ *
+ * Resolution Order: Level > Sponsor
  */
 export type InputSponsorConfig = {
     teams?: {
         [key: string]: {
             href?: string,
-            img?: string
+            img?: string,
         }
     },
     levels?: {
@@ -19,13 +21,24 @@ export type InputSponsorConfig = {
             href?: string,
             affiliatedWith?: (keyof InputSponsorConfig["teams"])[]
             level?: string,
-            description?: string
+            description?: string,
+            backgroundColor?: string,
+            badgeColor?: string,
         }
     },
     features?: {
         coloredHeadings?: boolean,
         randomizeOrder?: boolean,
-        badge?: boolean
+        
+        enableDescription?: boolean,
+        enableAffiliatedWith?: boolean,
+        enableBadge?: boolean,
+        enableHover?: boolean,
+        enableReferralUrl?: boolean,
+        
+        deriveBadgeColorFromLevel?: boolean,
+        deriveBackgroundColorFromLevel?: boolean,
+        
     }
 }
 

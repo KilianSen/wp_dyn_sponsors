@@ -35,5 +35,8 @@
       ],
       "level": "silver"
     }
+  },
+  "features": {
+    "badge": false
   }
 }

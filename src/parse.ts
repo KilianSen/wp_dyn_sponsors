@@ -1,4 +1,4 @@
-import {DeepRequired, fulfillRequirementWithPrimitive} from "./utils";
+import {DeepRequired} from "./utils";
 import {InputSponsorConfig, StructuredSponsorData} from "./types";
 import {DefaultFeatures} from "./default";
 
@@ -33,9 +33,9 @@ export function parseStructure(data: DeepRequired<InputSponsorConfig>): Structur
     }
 
     for (const sponsor in sponsors) {
-        const {img, href, affiliatedWith, level, description} = sponsors[sponsor];
+        const {img, href, affiliatedWith, level, description, ...rest} = sponsors[sponsor];
         structuredData.structure[level][sponsor] = {
-            img, href, affiliatedWith, description: description,
+            img, href, affiliatedWith, description: description, ...rest
         };
     }
 
@@ -52,7 +52,6 @@ export function parseStructure(data: DeepRequired<InputSponsorConfig>): Structur
             structuredData.features[feature] = features[feature];
         }
     }
-
     return structuredData;
 }
 

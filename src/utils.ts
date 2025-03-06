@@ -54,30 +54,3 @@ export function fulfillRequirementWithPrimitive<T>(input: T): DeepRequired<T> {
     }
     return result as DeepRequired<T>;
 }
-
-/**
- * Lightens or darkens a hex color by a given amount.
- * @param col color in hex with or without #
- * @param amt percentage (-100,100)
- */
-export function lightenDarkenHex(col: string, amt: number) {
-    let usePound = false;
-    if (col[0] == "#") {
-        col = col.slice(1);
-        usePound = true;
-    }
-    
-    const num = parseInt(col, 16);
-    
-    let r = (num >> 16) + amt;
-    r = Math.min(255, Math.max(0, r));
-    
-    let b = (Number(num >> 8) /*!//>*/ & Number(0x00FF)) + amt;
-    b = Math.min(255, Math.max(0, b));
-    
-    let g = (Number(num) & Number(0x0000FF)) + amt;
-    g = Math.min(255, Math.max(0, g));
-    
-    const result = (Number(g) | Number(b << 8/*!//>*/ ) | Number(r << 16/*!//>*/ )).toString(16).padStart(6, '0');
-    return (usePound ? "#" : "") + result;
-}

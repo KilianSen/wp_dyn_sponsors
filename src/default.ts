@@ -6,5 +6,11 @@ import {InputSponsorConfig} from "./types";
 export const DefaultFeatures: Required<InputSponsorConfig["features"]> = {
     coloredHeadings: true,
     randomizeOrder: true,
-    badge: true
+    enableDescription: true,
+    enableAffiliatedWith: true,
+    enableBadge: false,
+    enableHover: true,
+    enableReferralUrl: true,
+    deriveBadgeColorFromLevel: true,
+    deriveBackgroundColorFromLevel: true,
 }
