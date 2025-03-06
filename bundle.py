@@ -1,6 +1,7 @@
 import os
+import base64
 
-def get_files_by_ext(path, ext, op=None) -> dict[str, bytes]:
+def get_files_by_ext(path, ext, op=None) -> dict[str, str]:
     contents = {}
     for root, dirs, files in os.walk(path):
         for file in files:
@@ -33,7 +34,7 @@ if __name__ == "__main__":
                 f.write(tag("style", content))
 
             for name, content in js.items():
-                f.write(tag("script", content))
+                f.write(f'<script type="text/javascript" src="data:text/javascript;base64,{base64.b64encode(content.encode()).decode()}"></script>')
     except Exception as e:
         print("An error occurred during bundling, abort!",e)
         exit(1)
