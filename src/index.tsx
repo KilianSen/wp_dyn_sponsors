@@ -1,11 +1,9 @@
-// @ts-ignore
-import "./style.css"
 import {createRoot} from "react-dom/client";
 import {App} from "./app.tsx";
 
 declare let config: string
 
-const DEV_MODE = false;
+const DEV_MODE = document.getElementsByClassName("html").length === 0;
 
 async function init() {
 	if (DEV_MODE)

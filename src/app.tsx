@@ -10,13 +10,13 @@ export function App() {
 	
 	return (
 		<>
-			<>{
+			{
 				Object.keys(structuredSponsorData.structure).map(level =>
 					<div className='level'>
-						<h3 className='sponsor-heading' style={structuredSponsorData.features.coloredHeadings ? {color: structuredSponsorData.levels[level].color} : undefined}>{level}</h3>
+						<h3 className='sponsor-heading' style={structuredSponsorData.features.enableColorHeadings ? {color: structuredSponsorData.levels[level].color} : undefined}>{level}</h3>
 						<div className='level-sponsor-container'>
 							{
-								Object.keys(structuredSponsorData.structure[level]).toSorted(() => structuredSponsorData.features.randomizeOrder ? Math.random() - 0.5 : 0).map(sponsor => {
+								Object.keys(structuredSponsorData.structure[level]).toSorted(() => structuredSponsorData.features.enableRandomizedOrder ? Math.random() - 0.5 : 0).map(sponsor => {
 									return Card({
 										sponsor,
 										level,
@@ -27,10 +27,10 @@ export function App() {
 						</div>
 					</div>
 				)
-			}</>
-			<>{
-				structuredSponsorData.features.randomizeOrder ? <p>*To represent our sponsors fairly, we have randomized the order in which they are displayed.</p> : undefined
-			}</>
+			}
+			{
+				structuredSponsorData.features.enableRandomizedOrder ? <p>*To represent our sponsors fairly, we have randomized the order in which they are displayed.</p> : undefined
+			}
 		</>
 	)
 }

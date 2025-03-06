@@ -34,7 +34,7 @@ if __name__ == "__main__":
                 f.write(tag("style", content))
 
             for name, content in js.items():
-                f.write(f'<script type="text/javascript" src="data:text/javascript;base64,{base64.b64encode(content.encode()).decode()}" />')
+                f.write(f'<script type="text/javascript" src="data:text/javascript;base64,{base64.b64encode(content.encode()).decode()}"></script>')
     except Exception as e:
         print("An error occurred during bundling, abort!",e)
         exit(1)
